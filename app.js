@@ -1,0 +1,15 @@
+import express from 'express';
+import connectDB from './database/dbConnection.js';
+import errorHandler from './src/utils/errorHandler.js';
+import userRouter from './src/modules.js/user/user.routes.js';
+import companyRouter from './src/modules.js/company/company.routes.js';
+import jobRouter from './src/modules.js/job/job.routes.js';
+const app = express();
+connectDB();
+app.use(express.json());
+app.use(userRouter);
+app.use(companyRouter);
+app.use(jobRouter);
+app.use(errorHandler);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
